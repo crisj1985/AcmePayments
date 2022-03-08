@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PayWork
 {
-    class Program
+    public class Program
     {
         #region properties
         public static string PathFile { get; set; } = ConfigurationManager.AppSettings["AbsolutePathFile"];

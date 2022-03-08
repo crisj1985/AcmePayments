@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PayWork
 {
-    class DayWork
+    public class DayWork
     {
         public string Day { get; set; }
         public string Hour { get; set; }
