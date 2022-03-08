@@ -119,7 +119,7 @@ namespace PayWork
                 else if (intFinalHour > FinalHourWork)
                     intLevelFinalHour = 3;
 
-                switch (item.Day)
+                switch (item.Day.ToUpper())
                 {
                     case "MO":
                     case "TU":
