@@ -21,6 +21,8 @@ namespace PayWork
         public static int AmountWeekend2 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountWeekend2"]);
         public static int AmountWeekend3 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountWeekend3"]);
         public static int LenghtAbbreviationDay { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["LenghtAbbreviationDay"]);
+        public static char SeparatorName { get; set; } = Convert.ToChar(ConfigurationManager.AppSettings["SeparatorName"]);
+        public static char SeparatorDays { get; set; } = Convert.ToChar(ConfigurationManager.AppSettings["SeparatorDays"]);
         #endregion properties
 
         static void Main(string[] args)
@@ -57,9 +59,9 @@ namespace PayWork
                                            x = x.Trim().Replace(" ", string.Empty);
                                            objEmpWork = new EmployeeWork();
                                            lsDayWork = new List<DayWork>();
-                                           objEmpWork.Name = x.Substring(0, x.IndexOf('='));
-                                           x.Substring(x.IndexOf('=') + 1)
-                                           .Split(',')
+                                           objEmpWork.Name = x.Substring(0, x.IndexOf(SeparatorName));
+                                           x.Substring(x.IndexOf(SeparatorName) + 1)
+                                           .Split(SeparatorDays)
                                            .ToList()
                                            .ForEach(y =>
                                                         {
