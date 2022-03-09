@@ -38,6 +38,7 @@ namespace PayWork
                                                                              });
                                                         Console.WriteLine($"The amount to pay {x.Name} is: {intAmount} ");
                                                     });
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
