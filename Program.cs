@@ -171,12 +171,12 @@ namespace PayWork
                         }
                         break;
                     default:
-                        throw new Exception($"There is no day {item.Day}");
+                        throw new DayNoExistException($"There is no day {item.Day}");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception($"Hour structure error or {ex?.Message}");
+                throw;
             }
 
             return intResult;
