@@ -14,12 +14,12 @@ namespace PayWork
         public static string PathFile { get; set; } = ConfigurationManager.AppSettings["AbsolutePathFile"];
         public static int InitialHourWork { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["InitialHour"]);
         public static int FinalHourWork { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["FinalHour"]);
-        public static int MountBetweenWeek1 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["MountBetweenWeek1"]);
-        public static int MountBetweenWeek2 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["MountBetweenWeek2"]);
-        public static int MountBetweenWeek3 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["MountBetweenWeek3"]);
-        public static int MountWeekend1 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["MountWeekend1"]);
-        public static int MountWeekend2 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["MountWeekend2"]);
-        public static int MountWeekend3 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["MountWeekend3"]);
+        public static int AmountBetweenWeek1 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountBetweenWeek1"]);
+        public static int AmountBetweenWeek2 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountBetweenWeek2"]);
+        public static int AmountBetweenWeek3 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountBetweenWeek3"]);
+        public static int AmountWeekend1 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountWeekend1"]);
+        public static int AmountWeekend2 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountWeekend2"]);
+        public static int AmountWeekend3 { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["AmountWeekend3"]);
         public static int LenghtAbbreviationDay { get; set; } = Convert.ToInt32(ConfigurationManager.AppSettings["LenghtAbbreviationDay"]);
         #endregion properties
 
@@ -29,12 +29,12 @@ namespace PayWork
             {
                 ReadFileWorkEmp(PathFile).ForEach(x => 
                                                     {
-                                                        int intMount = 0;
+                                                        int intAmount = 0;
                                                         x.DaysWork.ForEach(y => 
                                                                              {
-                                                                                 intMount += Mount(y);
+                                                                                 intAmount += Amount(y);
                                                                              });
-                                                        Console.WriteLine($"The amount to pay {x.Name} is: {intMount} ");
+                                                        Console.WriteLine($"The amount to pay {x.Name} is: {intAmount} ");
                                                     });
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace PayWork
             
             return lsResult;
         }
-        public static int Mount(DayWork item)
+        public static int Amount(DayWork item)
         {
             int intResult = 0;
 
@@ -127,21 +127,21 @@ namespace PayWork
                         if (intLevelInitialHour == intLevelFinalHour)
                         {
                             if (intInitialHour <= InitialHourWork)
-                                intResult = intHours * MountBetweenWeek1;
+                                intResult = intHours * AmountBetweenWeek1;
                             else if (intInitialHour > InitialHourWork && intInitialHour <= FinalHourWork)
-                                intResult = intHours * MountBetweenWeek2;
+                                intResult = intHours * AmountBetweenWeek2;
                             else if (intInitialHour > FinalHourWork)
-                                intResult = intHours * MountBetweenWeek3;
+                                intResult = intHours * AmountBetweenWeek3;
                         }
                         else 
                         { 
                             if (intLevelInitialHour == 1 && intLevelFinalHour == 2)
                             {
-                                intResult = (InitialHourWork - intInitialHour) * MountBetweenWeek1 + (intFinalHour - InitialHourWork) * MountBetweenWeek2;
+                                intResult = (InitialHourWork - intInitialHour) * AmountBetweenWeek1 + (intFinalHour - InitialHourWork) * AmountBetweenWeek2;
                             }
                             else if (intLevelInitialHour == 2 && intLevelFinalHour == 3)
                             {
-                                intResult = (FinalHourWork - intInitialHour) * MountBetweenWeek2 + (intFinalHour - FinalHourWork) * MountBetweenWeek3;
+                                intResult = (FinalHourWork - intInitialHour) * AmountBetweenWeek2 + (intFinalHour - FinalHourWork) * AmountBetweenWeek3;
                             }
                         }
                         break;
@@ -150,21 +150,21 @@ namespace PayWork
                         if (intLevelInitialHour == intLevelFinalHour)
                         {
                             if (intInitialHour <= InitialHourWork)
-                                intResult = intHours * MountWeekend1;
+                                intResult = intHours * AmountWeekend1;
                             else if (intInitialHour > InitialHourWork && intInitialHour <= FinalHourWork)
-                                intResult = intHours * MountWeekend2;
+                                intResult = intHours * AmountWeekend2;
                             else if (intInitialHour > FinalHourWork)
-                                intResult = intHours * MountWeekend3;
+                                intResult = intHours * AmountWeekend3;
                         }
                         else
                         {
                             if (intLevelInitialHour == 1 && intLevelFinalHour == 2)
                             {
-                                intResult = (InitialHourWork - intInitialHour) * MountWeekend1 + (intFinalHour - InitialHourWork) * MountWeekend2;
+                                intResult = (InitialHourWork - intInitialHour) * AmountWeekend1 + (intFinalHour - InitialHourWork) * AmountWeekend2;
                             }
                             else if (intLevelInitialHour == 2 && intLevelFinalHour == 3)
                             {
-                                intResult = (FinalHourWork - intInitialHour) * MountWeekend2 + (intFinalHour - FinalHourWork) * MountWeekend3;
+                                intResult = (FinalHourWork - intInitialHour) * AmountWeekend2 + (intFinalHour - FinalHourWork) * AmountWeekend3;
                             }
                         }
                         break;
